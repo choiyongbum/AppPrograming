@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="utf-8">
+    <title>하체운동</title>
+    <style>
+         * {
+            box-sizing: border-box;
+        }
+
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            margin-top: 40px;
+            color: #4285F4;
+        }
+
+        form {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            margin-top: 40px;
+        }
+
+        label {
+            margin-top: 10px;
+            font-size: 18px;
+        }
+
+        input[type="text"],
+        input[type="number"] {
+            width: 200px;
+            height: 30px;
+            font-size: 16px;
+            padding: 5px;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+        }
+
+        .input-group {
+            margin-right: 20px;
+        }
+
+        button {
+            margin-top: 10px;
+            background-color: #4285F4;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #3367D6;
+        }
+
+        .back-button {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background-color: #4285F4;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            text-decoration: none;
+        }
+
+        .back-button:hover {
+            background-color: #3367D6;
+            cursor: pointer;
+        }
+
+        .exercise-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            margin-top: 40px;
+        }
+
+        .exercise-item {
+            margin: 10px;
+            text-align: center;
+            width: calc(33.33% - 20px);
+            height: 400px;
+            border: 1px solid #000;
+            border-radius: 4px;
+            padding: 10px;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #fff;
+            transition: background-color 0.3s ease;
+        }
+
+        .exercise-item.selected {
+            background-color: lightblue;
+        }
+
+        .exercise-title {
+            margin-top: 5px;
+            color: black;
+        }
+
+        .exercise-image {
+            width: %;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 4px;
+        }
+
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+        }
+
+        h1 {
+            margin-top: 40px;
+            color: #4285F4;
+        }
+
+        form {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            margin-top: 40px;
+        }
+
+        label {
+            margin-top: 10px;
+            font-size: 18px;
+        }
+
+        input[type="text"],
+        input[type="number"] {
+            width: 200px;
+            height: 30px;
+            font-size: 16px;
+            padding: 5px;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+        }
+
+        .input-group {
+            margin-right: 20px;
+        }
+
+        button {
+            margin-top: 10px;
+            background-color: #4285F4;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .button:hover {
+            background-color: #3367D6;
+        }
+
+        .back-button {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background-color: #4285F4;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            text-decoration: none;
+        }
+
+        .back-button:hover {
+            background-color: #3367D6;
+            cursor: pointer;
+        }
+
+        .exercise-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            margin-top: 40px;
+        }
+
+        .exercise-item {
+            margin: 10px;
+            text-align: center;
+            width: calc(33.33% - 20px);
+            height: 300px;
+            border: 1px solid #000;
+            border-radius: 4px;
+            padding: 10px;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .exercise-item.selected {
+            background-color: lightblue;
+        }
+
+        .exercise-title {
+            margin-top: 10px;
+            color: black;
+        }
+
+        .exercise-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 4px;
+        }
+    </style>
+    <script language="javascript">
+        function toggleExercise(element) {
+            var selectedExercises = document.querySelectorAll(".exercise-item.selected");
+            for (var i = 0; i < selectedExercises.length; i++) {
+                selectedExercises[i].classList.remove("selected");
+            }
+
+            element.classList.add("selected");
+            var exerciseName = element.getAttribute("data-exercise-name");
+            var exerciseInput = document.getElementById("운동종목");
+            exerciseInput.value = exerciseName;
+
+            var selectedExercisesNames = Array.from(selectedExercises).map(function (exercise) {
+                return exercise.getAttribute("data-exercise-name");
+            });
+            var selectedExercisesInput = document.getElementById("selected-exercises");
+            selectedExercisesInput.value = selectedExercisesNames.join(",");
+        }
+
+        function Input() {
+            if (document.frmInput.운동종목.value == "") {
+                alert("운동종목을 확인해주세요.");
+                document.frmInput.운동종목.focus();
+                return false;
+            }
+            if (document.frmInput.세트.value == "") {
+                alert("세트를 확인해주세요.");
+                document.frmInput.세트.focus();
+                return false;
+            }
+            if (document.frmInput.횟수.value == "") {
+                alert("횟수를 확인해주세요.");
+                document.frmInput.횟수.focus();
+                return false;
+            }
+            document.frmInput.submit();
+        }
+    </script>
+</head>
+
+<body>
+    <a class="back-button" href="success.html">뒤로가기</a>
+    <h1>하체운동</h1>
+    <form name="frmInput" action="하체운동.php" method="post" enctype="multipart/form-data">
+        <div class="input-group">
+            <label for="운동종목">운동종목</label>
+            <input type="text" name="운동종목" id="운동종목" required>
+        </div>
+        <div class="input-group">
+            <label for="세트">세트</label>
+            <input type="text" name="세트" id="세트" required pattern="[가-힣a-zA-Z0-9]{1,4}">
+        </div>
+        <div class="input-group">
+            <label for="횟수">횟수</label>
+            <input type="number" name="횟수" id="횟수" required>
+        </div>
+        <input type="hidden" id="selected-exercises" name="selected-exercises">
+        <button type="button" onclick="Input()">추가하기</button>
+    </form>
+
+    <!-- 운동 종목 -->
+    <div class="exercise-container">
+        <div class="exercise-item" onclick="toggleExercise(this)" data-exercise-name="스쿼트">
+            <h3 class="exercise-title">스쿼트</h3>
+            <img class="exercise-image" src="하체1.png" alt="스쿼트">
+        </div>
+        <div class="exercise-item" onclick="toggleExercise(this)" data-exercise-name="런지">
+            <h3 class="exercise-title">런지</h3>
+            <img class="exercise-image" src="하체2.png" alt="런지">
+        </div>
+        <div class="exercise-item" onclick="toggleExercise(this)" data-exercise-name="레그 프레스">
+            <h3 class="exercise-title">레그 프레스</h3>
+            <img class="exercise-image" src="하체3.png" alt="레그 프레스">
+        </div>
+        <div class="exercise-item" onclick="toggleExercise(this)" data-exercise-name="레그 컬">
+            <h3 class="exercise-title">레그 컬</h3>
+            <img class="exercise-image" src="하체4.jpg" alt="레그 컬">
+        </div>
+        <div class="exercise-item" onclick="toggleExercise(this)" data-exercise-name="레그 익스텐션">
+            <h3 class="exercise-title">레그 익스텐션</h3>
+            <img class="exercise-image" src="하체5.png" alt="레그 익스텐션">
+        </div>
+        <div class="exercise-item" onclick="toggleExercise(this)" data-exercise-name="카프 레이즈">
+            <h3 class="exercise-title">카프 레이즈</h3>
+            <img class="exercise-image" src="하체6.png" alt="카프 레이즈">
+        </div>
+        <div class="exercise-item" onclick="toggleExercise(this)" data-exercise-name="핵스쿼트">
+            <h3 class="exercise-title">핵스쿼트</h3>
+            <img class="exercise-image" src="하체7.jpg" alt="핵스쿼트">
+        </div>
+        <div class="exercise-item" onclick="toggleExercise(this)" data-exercise-name="스티프 레그 데드리프트">
+            <h3 class="exercise-title">스티프 레그 데드리프트</h3>
+            <img class="exercise-image" src="하체8.png" alt="스티프 레그 데드리프트">
+        </div>
+        <div class="exercise-item" onclick="toggleExercise(this)" data-exercise-name="힙 스러스트">
+            <h3 class="exercise-title">힙 스러스트</h3>
+            <img class="exercise-image" src="하체9.png" alt="힙 스러스트">
+        </div>
+        <div class="exercise-item" onclick="toggleExercise(this)" data-exercise-name="힙 어브덕션">
+            <h3 class="exercise-title">힙 어브덕션</h3>
+            <img class="exercise-image" src="하체10.png" alt="힙 어브덕션">
+        </div>
+    </div>
+    <script>
+        var exerciseItems = document.querySelectorAll(".exercise-item");
+        for (var i = 0; i < exerciseItems.length; i++) {
+            exerciseItems[i].addEventListener("click", function () {
+                var selectedItems = document.querySelectorAll(".exercise-item.selected");
+                for (var j = 0; j < selectedItems.length; j++) {
+                    selectedItems[j].classList.remove("selected");
+                }
+                this.classList.add("selected");
+            });
+        }
+    </script>
+</body>
+
+</html>

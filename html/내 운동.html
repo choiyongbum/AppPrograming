@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+  <title>운동일지</title>
+
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 0;
+      background-color: #C2DFFF;
+    }
+
+    .exercise-container {
+      text-align: center;
+      margin-top: 0;
+      padding: 20px;
+      background-color: #FFFFFF;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    }
+
+    h1 {
+      font-size: 2.5em;
+      margin-bottom: 20px;
+    }
+
+    ul {
+      list-style-type: none;
+      padding: 0;
+      margin-top: 20px;
+    }
+
+    li {
+      margin-bottom: 10px;
+      font-size: 1.5em;
+      display: flex;
+      align-items: center;
+    }
+
+    .checkbox {
+      margin-right: 10px;
+      width: 30px;
+      height: 30px;
+    }
+
+    .back-button {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      padding: 5px;
+      font-size: 1em;
+      border: none;
+      border-radius: 10px;
+      background-color: #4CAF50;
+      color: #ffffff;
+      z-index: 9999;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .back-button:hover {
+      background-color: #45a049;
+    }
+
+    button {
+      font-size: 1.2em;
+      padding: 10px 20px;
+      margin: 10px;
+      border: none;
+      border-radius: 5px;
+      background-color: #4CAF50;
+      color: #ffffff;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    .total-time {
+      margin-top: 20px;
+      font-size: 1.2em;
+    }
+
+    @media (max-width: 600px) {
+      body {
+        background-size: contain;
+      }
+
+      h1 {
+        font-size: 1.5em;
+      }
+
+      li {
+        font-size: 1em;
+      }
+
+      .back-button {
+        top: 20px;
+        left: 20px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="exercise-container">
+    <h1>운동일지</h1>
+    <button onclick="startExercise()">운동시작</button>
+    <div id="timer"></div>
+    <button class="back-button" onclick="goBack()">뒤로가기</button>
+    <ul id="exercise-list"></ul>
+    <button onclick="checkAll()">모두 선택</button>
+    <button onclick="uncheckAll()">모두 해제</button>
+    <button onclick="endExercise()">운동 끝</button>
+    <div id="total-time" class="total-time"></div>
+  </div>
+
+  <script>
+    var timer;
+    var isExerciseStarted = false;
+    var totalExerciseTime = 0;
+
+    function startExercise() {
+      var time = 0;
+      clearInterval(timer);
+      timer = setInterval(function () {
+        if (isExerciseStarted) {
+          time++;
+          totalExerciseTime = time;
+          displayTimer(time);
+        }
+      }, 1000);
+      isExerciseStarted = true;
+    }
+
+    function displayTimer(time) {
+      var timerContainer = document.getElementById('timer');
+      timerContainer.textContent = formatTime(time);
+    }
+
+    function formatTime(time) {
+      var hours = Math.floor(time / 3600);
+      var minutes = Math.floor((time % 3600) / 60);
+      var seconds = time % 60;
+      return (
+        leadingZero(hours) +
+        ':' +
+        leadingZero(minutes) +
+        ':' +
+        leadingZero(seconds)
+      );
+    }
+
+    function leadingZero(number) {
+      return number < 10 ? '0' + number : number;
+    }
+
+    window.addEventListener('DOMContentLoaded', function () {
+      fetchExerciseData('내 운동.php');
+      fetchExerciseData('가슴운동1.php');
+      fetchExerciseData('하체운동1.php');
+      fetchExerciseData('어깨운동1.php');
+      fetchExerciseData('팔운동1.php');
+    });
+
+    function goBack() {
+      window.history.back();
+    }
+
+    function displayExerciseData(data) {
+      var exerciseList = document.getElementById('exercise-list');
+
+      data.forEach(function (item) {
+        var listItem = document.createElement('li');
+        var checkbox = document.createElement('input');
+        checkbox.type = 'checkbox';
+        checkbox.classList.add('checkbox');
+        listItem.appendChild(checkbox);
+
+        var exerciseText = document.createElement('span');
+        exerciseText.textContent =
+          item.운동종목 + ', ' + item.세트 + '세트, ' + item.횟수 + '회';
+        listItem.appendChild(exerciseText);
+
+        exerciseList.appendChild(listItem);
+      });
+    }
+
+    function checkAll() {
+      var checkboxes = document.querySelectorAll('.checkbox');
+      checkboxes.forEach(function (checkbox) {
+        checkbox.checked = true;
+      });
+    }
+
+    function uncheckAll() {
+      var checkboxes = document.querySelectorAll('.checkbox');
+      checkboxes.forEach(function (checkbox) {
+        checkbox.checked = false;
+      });
+    }
+
+    function fetchExerciseData(url) {
+      fetch(url)
+        .then(function (response) {
+          return response.json();
+        })
+        .then(function (data) {
+          displayExerciseData(data);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    }
+
+    function endExercise() {
+      isExerciseStarted = false;
+      clearInterval(timer);
+      displayTimer(totalExerciseTime);
+      checkCompleted();
+    }
+
+    function checkCompleted() {
+      var checkboxes = document.querySelectorAll('.checkbox');
+      var allChecked = true;
+      checkboxes.forEach(function (checkbox) {
+        if (!checkbox.checked) {
+          allChecked = false;
+          return;
+        }
+      });
+
+      var totalTimeContainer = document.getElementById('total-time');
+      if (allChecked) {
+        totalTimeContainer.textContent = '총 운동 시간: ' + formatTime(totalExerciseTime);
+        alert('오운완!  총 운동 시간: ' + formatTime(totalExerciseTime));
+      } else {
+        totalTimeContainer.textContent = '';
+        alert('체크되지 않은 항목이 있습니다.');
+      }
+    }
+  </script>
+</body>
+</html>

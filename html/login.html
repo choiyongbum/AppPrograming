@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Create a stylish landing page for your business startup and get leads for the offered services with this HTML landing page template.">
+    <meta name="author" content="Inovatik">
+
+    <!-- OG Meta Tags to improve the way the post looks when you share the page on LinkedIn, Facebook, Google+ -->
+    <meta property="og:site_name" content="" /> <!-- website name -->
+    <meta property="og:site" content="" /> <!-- website link -->
+    <meta property="og:title" content=""/> <!-- title shown in the actual shared post -->
+    <meta property="og:description" content="" /> <!-- description shown in the actual shared post -->
+    <meta property="og:image" content="" /> <!-- image link, make sure it's jpg -->
+    <meta property="og:url" content="" /> <!-- where do you want your post to link to -->
+    <meta property="og:type" content="article" />
+
+    <!-- Website Title -->
+    <title>LOGIN</title>
+    
+    <!-- Styles -->
+    <link href="https://fonts.googleapis.com/css?family=Raleway:400,400i,600,700,700i&amp;subset=latin-ext" rel="stylesheet">
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <link href="css/fontawesome-all.css" rel="stylesheet">
+    <link href="css/swiper.css" rel="stylesheet">
+    <link href="css/magnific-popup.css" rel="stylesheet">
+    <link href="css/styles.css" rel="stylesheet">
+
+    <style>
+        background-color : lightblue;
+        /* Add custom styles here */
+        body {
+            background-color: lightblue;
+            display: flex;
+            justify-content: top;
+            align-items: center;
+            flex-direction: column; /* 세로 방향으로 요소 정렬 */
+            min-height: 100vh;
+            margin: 0;
+            padding: 0;
+            font-family: 'Raleway', sans-serif;
+            background: no-repeat center center fixed;
+            background-size: cover;
+        }
+
+        form {
+            width: 300px;
+            margin-top: 10px; /* 테이블의 상단 여백 조정 */
+            text-align: center;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        table {
+            width: 95%;
+            text-align: center;
+            
+        }
+
+        td {
+            padding: 10px 0;
+        }
+
+        label {
+            font-weight: 600;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            height: 30px;
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            font-size: 14px;
+        }
+
+        button {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 8px 16px;
+            background-color: #007bff;
+            color: #ffffff;
+            border: none;
+            border-radius: 3px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Media Query for Mobile Devices */
+        @media (max-width: 450px) {
+            form {
+                width: 95%;
+                margin-top: 50px;
+            }
+        }
+    </style>
+
+    <script>
+        function validateForm() {
+            var id = document.getElementById("id").value;
+            var pw = document.getElementById("pw").value;
+            
+            if (id === "" || pw === "") {
+                alert("아이디와 비밀번호를 입력해주세요.");
+                return false;
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <form action="loginCheck.php" method="post" enctype="multipart/form-data" onsubmit="return validateForm();">
+        <table>
+            <tr>
+                <td colspan="2"><label for="운동"><h2>운동하러 갈래?</h2></label></td>
+            </tr>
+            <tr>
+                <td><label for="id">ID</label></td>
+                <td><input type="text" id="id" name="id"></td>
+            </tr>
+            <tr>
+                <td><label for="pw">Password</label></td> 
+                <td><input type="text" id="pw" name="pw"></td>
+            </tr>
+        </table>
+        <br><br>
+        <button type="submit">로그인</button> 
+        <button type="button" onclick="location.href='member_create.html'">회원가입</button>
+    </form>                           
+</body>
+</html>

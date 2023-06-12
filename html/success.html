@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+<head>
+  <title>운동 앱</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 0;
+      background-color: #ffffff; /* 배경색을 하얀색으로 변경 */
+    }
+
+    .exercise-container {
+      text-align: center;
+      margin-top: 0;
+    }
+
+    h1 {
+      font-size: 2.5em;
+    }
+
+    .button-row {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: nowrap;
+      margin-top: 20px;
+    }
+
+    .button-row button {
+      margin: 10px;
+      font-size: 1.5em;
+      border: 1px solid #000000;
+    }
+
+    .large-button {
+      font-size: 2em;
+      padding: 15px 30px;
+    }
+
+    button {
+      display: block;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 20px;
+      background-color: #ffffff;
+    }
+
+    /* 핸드폰 화면에 최적화된 크기 설정 */
+    @media (max-width: 600px) {
+      body {
+        background-size: contain;
+      }
+
+      h1 {
+        font-size: 1.5em;
+      }
+
+      .button-row button {
+        font-size: 1em;
+      }
+
+      .large-button {
+        font-size: 1.5em;
+      }
+    }
+    
+    /* 추가된 CSS */
+    #가슴운동 {
+      background-color: #ffcccc;
+      color: #000000;
+    }
+    
+    #등운동 {
+      background-color: #cce5ff;
+      color: #000000;
+    }
+    
+    #어깨운동 {
+      background-color: #e5ccff;
+      color: #000000;
+    }
+    
+    #팔운동 {
+      background-color: #ccffcc;
+      color: #000000;
+    }
+    
+    #하체운동 {
+      background-color: #ffffcc;
+      color: #000000;
+    }
+    
+    #운동일지 {
+      background-color: #ff9900;
+      color: #ffffff;
+    }
+    
+    #초기화 {
+      background-color: #ff0000;
+      color: #ffffff;
+    }
+    
+    /* 배경색에 어울리는 색상 추가 */
+    #가슴운동 {
+      background-color: #ffd6e0;
+    }
+    
+    #등운동 {
+      background-color: #c2e3ff;
+    }
+    
+    #어깨운동 {
+      background-color: #e4d2ff;
+    }
+    
+    #팔운동 {
+      background-color: #d1ffd1;
+    }
+    
+    #하체운동 {
+      background-color: #fffdb0;
+    }
+    
+    #운동일지 {
+      background-color: #ffa31a;
+    }
+    
+    #초기화 {
+      background-color: #ff4d4d;
+    }
+    
+    /* 해골 이미지 위치 조정 */
+    .image-container {
+      margin-top: 20px;
+    }
+    
+    .image-container img {
+      width: 200px;
+      height: 200px;
+      margin: 20px auto;
+      display: block;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="exercise-container">
+    <h1>오늘의 운동</h1>
+    <div class="button-row">
+      <button id="가슴운동">가슴운동</button>
+      <button id="등운동">등운동</button>
+      <button id="어깨운동">어깨운동</button>
+    </div>
+    <div class="button-row">
+      <button id="팔운동">팔운동</button>
+      <button id="하체운동">하체운동</button>
+    </div>
+    <div class="button-row">
+      <button id="운동일지" class="large-button">운동시작</button>
+      <button id="초기화" class="large-button">초기화하기</button>
+    </div>
+    <div class="image-container">
+      <img src="해골.jpg" alt="해골 이미지">
+    </div>
+  </div>
+  <script>
+    document.getElementById('가슴운동').addEventListener('click', () => {
+      location.href = '가슴운동.html';
+    });
+    document.getElementById('등운동').addEventListener('click', () => {
+      location.href = '등운동.html';
+    });
+    document.getElementById('어깨운동').addEventListener('click', () => {
+      location.href = '어깨운동.html';
+    });
+    document.getElementById('팔운동').addEventListener('click', () => {
+      location.href = '팔운동.html';
+    });
+    document.getElementById('하체운동').addEventListener('click', () => {
+      location.href = '하체운동.html';
+    });
+    document.getElementById('운동일지').addEventListener('click', () => {
+      location.href = '내 운동.html';
+    });
+    document.getElementById('초기화').addEventListener('click', () => {
+      if (confirm("모든 운동 데이터를 초기화하시겠습니까?")) {
+        location.href = 'reset.php';
+      }
+    });
+  </script>
+</body>
+
+</html>
